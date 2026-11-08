@@ -6,12 +6,11 @@
 <title>Dictado Señor Banana</title>
 
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#6d3fd1">
+<meta name="theme-color" content="#ffd93b">
 <!-- أيقونات Apple (تمتلك واحدة بالفعل، يمكنك إضافة أحجام أخرى إذا رغبت) -->
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
-<link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167x167.png">
 
 <!-- أيقونة المفضلة (Favicon) للمتصفح العادي -->
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
@@ -23,122 +22,178 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Lilita+One&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f2ff;--card:#fff;--line:#e4d9fa;--ink:#2b1b4d;--dim:#6b5b8f;--purple:#6d3fd1;--purple2:#8b5cf6;--purple-soft:#efe8ff;--orange:#ff8a1f;--orange-soft:#fff0e0;--green:#12915a;--green-soft:#e1f6ec;--red:#d6336c;--head:'Fredoka','Trebuchet MS',system-ui,sans-serif;}
+/* Señor Banana: banana flesh, peel yellow, speckle-brown ink, leaf green, fruit-sticker blue */
+:root{
+ --bg:#fff6d1;--card:#fff;--line:#f0dfa0;
+ --ink:#4a2e14;--dim:#7a5a35;
+ --banana:#ffd93b;--ripe:#f2b705;--banana-soft:#fff0b3;
+ --leaf:#1f7a4d;--leaf-soft:#e3f3e9;--green:var(--leaf);
+ --sticker:#2457c5;
+ --red:#c8322b;--orange-ink:#9a4a00;--orange-soft:#ffe7c2;
+ --head:'Lilita One','Trebuchet MS',system-ui,sans-serif;
+ --read:'Andika','Trebuchet MS',system-ui,sans-serif;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 'Nunito',system-ui,'Segoe UI',sans-serif}
-header{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff}
-.top{max-width:50rem;margin:0 auto;padding:.9rem 1.25rem;display:flex;align-items:center;gap:.8rem}
-.logo{width:2.6rem;height:2.6rem;border-radius:14px;background:var(--orange);display:grid;place-items:center;font-size:1.5rem;box-shadow:0 3px 0 rgba(0,0,0,.2)}
-.top b{font:700 1.25rem var(--head);display:block;line-height:1.1}.top small{opacity:.85}
-main{max-width:50rem;margin:0 auto;padding:1.25rem 1.25rem 3rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 var(--read)}
 section{display:block}[hidden]{display:none!important}
-.hero{display:flex;gap:1.2rem;align-items:center;background:linear-gradient(135deg,var(--orange),#ffb347);border-radius:24px;padding:1.4rem;box-shadow:0 6px 0 #d66f0c;margin-bottom:1.4rem}
-.mascot{font-size:4.2rem;line-height:1;filter:drop-shadow(0 4px 0 rgba(0,0,0,.15))}
-.hero h1{margin:0;font:700 2rem/1.1 var(--head)}.hero p{margin:.4rem 0 .8rem;font-weight:600}
-.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:1.4rem;margin-bottom:1.2rem}
-h2{margin:0 0 .8rem;font:600 1.35rem var(--head);display:flex;align-items:center;gap:.6rem}
-.num{display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--purple);color:#fff;font-size:1rem}
-.muted{color:var(--dim);font-size:.92rem;margin:.4rem 0}
+
+/* header: yellow band with the name on a fruit sticker */
+header{background:var(--banana);border-bottom:4px solid var(--ripe)}
+.top{max-width:50rem;margin:0 auto;padding:.9rem 1.25rem;display:flex;align-items:center;gap:.7rem}
+.logo{font-size:2rem;line-height:1}
+.top>div{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem 1rem}
+.top b{display:inline-block;font:400 1.3rem/1 var(--head);letter-spacing:.02em;color:#fff;background:var(--sticker);
+ padding:.6rem 1.3rem;border-radius:50%;transform:rotate(-3deg);box-shadow:0 0 0 3px #fff,0 4px 0 3px rgba(74,46,20,.2)}
+.top small{font-weight:700;font-size:1rem}
+main{max-width:50rem;margin:0 auto;padding:1.4rem 1.25rem 3rem}
+
+/* hero: Señor Banana says hello in a speech bubble */
+.hero{display:flex;gap:1.1rem;align-items:flex-end;margin:.4rem 0 1.6rem}
+.mascot{flex:none;width:5.5rem;height:5.5rem;display:grid;place-items:center;font-size:3.5rem;line-height:1;
+ background:var(--banana);border:3px solid var(--ink);border-radius:50%}
+.card .mascot{margin:0 auto .5rem}
+.bubble{position:relative;flex:1;min-width:0;background:#fff;border:3px solid var(--ink);border-radius:26px;padding:1.1rem 1.35rem 1.2rem}
+.bubble::before{content:"";position:absolute;left:-13px;bottom:24px;width:22px;height:22px;background:#fff;
+ border-left:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg)}
+.hero h1{margin:0;font:400 2.2rem/1.1 var(--head)}
+.hero p{margin:.4rem 0 .9rem;font-size:1.1rem;max-width:60ch}
+
+/* panels and steps */
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:1.3rem 1.4rem;margin-bottom:1.1rem}
+h2{margin:0 0 .8rem;font:400 1.35rem/1.25 var(--head);display:flex;align-items:center;gap:.6rem}
+.num{flex:none;display:inline-grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;
+ background:var(--banana);color:var(--ink);border:2px solid var(--ink);font:400 1.05rem var(--head)}
+.muted{color:var(--dim);font-size:.95rem;margin:.4rem 0}
+
+/* controls */
 button,select,input,textarea{font:inherit}
-button{cursor:pointer;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:.6rem 1.1rem;font-weight:700}
-button:hover:not(:disabled){border-color:var(--purple)}button:disabled{opacity:.45;cursor:not-allowed}
-.btn{border:0;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.22);padding:.8rem 1.4rem;font:600 1.1rem var(--head)}
-.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.22)}
-.go{background:var(--green)}.hot{background:var(--orange);color:var(--ink)}.violet{background:var(--purple)}
-:is(button,input,select,textarea):focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+button{cursor:pointer;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:.6rem 1.1rem;font-weight:700;min-height:44px}
+button:hover:not(:disabled){border-color:var(--ink)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.btn{border:2px solid rgba(74,46,20,.25);color:#fff;box-shadow:0 4px 0 rgba(74,46,20,.35);padding:.8rem 1.4rem;font:400 1.15rem var(--head);letter-spacing:.01em}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 rgba(74,46,20,.35)}
+.go{background:var(--leaf)}.hot{background:var(--banana);color:var(--ink)}.violet{background:var(--sticker)}
+:is(button,input,select,textarea,summary):focus-visible{outline:3px solid var(--sticker);outline-offset:2px}
 .row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.8rem 0}
-.seg{display:inline-flex;flex-wrap:wrap;gap:6px;padding:5px;background:var(--purple-soft);border-radius:16px}
-.seg button{border:0;background:transparent;padding:.5rem 1rem;color:var(--purple)}
-.seg button.on{background:var(--purple);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.2)}
-textarea,input[type=text],input[type=number]{width:100%;padding:.8rem 1rem;background:#fff;color:var(--ink);border:2px solid var(--line);border-radius:14px;font-size:1.15rem}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;background:var(--banana-soft);border-radius:16px}
+.seg button{border:0;background:transparent;padding:.5rem 1rem;min-height:40px}
+.seg button:hover:not(:disabled){background:#fff}
+.seg button.on{background:var(--sticker);color:#fff;box-shadow:0 3px 0 rgba(74,46,20,.3)}
+textarea,input[type=text],input[type=number]{width:100%;padding:.8rem 1rem;background:#fff;color:var(--ink);border:2px solid var(--line);border-radius:14px;font-size:1.2rem}
 input[type=number]{width:6rem}
 label.check{display:flex;gap:.6rem;align-items:center;margin:.5rem 0}
-input[type=checkbox]{accent-color:var(--green);width:1.15rem;height:1.15rem}
-details{margin:.8rem 0}summary{cursor:pointer;font-weight:700;color:var(--purple)}
-.warn{padding:.6rem .9rem;border-radius:14px;background:var(--orange-soft);border:2px solid var(--orange);margin:.8rem 0}
-.bar{height:14px;background:var(--purple-soft);border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--orange));border-radius:8px;transition:width .3s}
-.counter{font:700 1.8rem var(--head);margin:.8rem 0 0}.counter span{color:var(--dim);font-size:1.1rem;font-weight:500}
-.status{color:var(--green);font-weight:700;min-height:1.6rem;margin:.2rem 0 .6rem}
-input[type=range]{width:100%;accent-color:var(--orange);height:1.6rem}
-.sentence{padding:1rem;border:2px dashed var(--purple2);border-radius:14px;font-size:1.3rem;margin:.8rem 0;background:var(--purple-soft)}
-.write{min-height:11rem;font-size:1.3rem;line-height:1.7}
-.sp{display:flex;flex-wrap:wrap;gap:.45rem;margin:.6rem 0}.sp button{padding:.35rem .8rem;font-size:1.15rem;background:var(--green-soft);border-color:#b7e6cf;color:var(--green)}
-.stars{font-size:3rem;letter-spacing:.2rem;color:var(--orange);line-height:1}.stars .off{color:#d9cdf2}
+input[type=checkbox]{accent-color:var(--leaf);width:1.15rem;height:1.15rem}
+details{margin:.8rem 0}summary{cursor:pointer;font-weight:700}
+.warn{padding:.6rem .9rem;border-radius:14px;background:var(--banana-soft);border:2px solid var(--ripe);margin:.8rem 0}
+
+/* dictation */
+.bar{height:16px;background:var(--banana-soft);border:2px solid var(--line);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--leaf);transition:width .3s}
+.counter{font:400 1.8rem var(--head);margin:.8rem 0 0}.counter span{color:var(--dim);font:700 1.05rem var(--read)}
+.status{color:var(--leaf);font-weight:700;min-height:1.6rem;margin:.2rem 0 .6rem}
+input[type=range]{width:100%;accent-color:var(--sticker);height:1.6rem}
+.sentence{padding:1rem 1.1rem;border:2px dashed var(--ripe);border-radius:14px;font-size:1.35rem;margin:.8rem 0;background:#fffbe8}
+.write{min-height:11rem;font-size:1.35rem;line-height:1.75}
+.sp{display:flex;flex-wrap:wrap;gap:.45rem;margin:.6rem 0}
+.sp button{padding:.35rem .8rem;font-size:1.2rem;background:var(--leaf-soft);border-color:#b9dfc8;color:var(--leaf)}
+
+/* correction */
+.stars{font-size:3rem;letter-spacing:.2rem;line-height:1;color:var(--ripe);-webkit-text-stroke:1.5px var(--ink)}
+.stars .off{color:#f6ecc8;-webkit-text-stroke-color:rgba(74,46,20,.3)}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1rem 0}
-.stats div{background:var(--purple-soft);border-radius:16px;padding:.8rem;text-align:center}.stats b{display:block;font:700 2rem var(--head)}.stats span{color:var(--dim);font-size:.85rem}
-.stats .a b{color:var(--purple)}.stats .b b{color:var(--green)}.stats .c b{color:var(--red)}
-.marked{font-size:1.25rem;line-height:2.3}.marked>span,.marked>s{display:inline-block;margin-right:.4em}
-.marked .w s,.marked .x{color:var(--red)}.marked .w b{color:var(--green);text-decoration:underline;text-decoration-thickness:3px}
-.marked .m{background:var(--orange-soft);color:#b45309;border-radius:6px;padding:0 .3em;box-shadow:inset 0 -3px 0 var(--orange)}
-.msg{font:600 1.4rem/1.3 var(--head);margin:.6rem 0}
-.model{white-space:pre-wrap;font-size:1.2rem;line-height:1.8}
-.word{font:700 3.2rem/1.2 var(--head);color:var(--purple);margin:.6rem 0;letter-spacing:.04em}
-.dots{display:flex;gap:.5rem;margin:.6rem 0}.dots i{width:1.1rem;height:1.1rem;border-radius:50%;background:var(--purple-soft);border:2px solid var(--purple2)}.dots i.f{background:var(--green);border-color:var(--green)}
+.stats div{background:var(--banana-soft);border-radius:16px;padding:.8rem;text-align:center}
+.stats b{display:block;font:400 2.1rem var(--head)}.stats span{color:var(--dim);font-size:.85rem}
+.stats .a b{color:var(--sticker)}.stats .b b{color:var(--leaf)}.stats .c b{color:var(--red)}
+.marked{font-size:1.3rem;line-height:2.3}.marked>span,.marked>s{display:inline-block;margin-right:.4em}
+.marked .w s,.marked .x{color:var(--red)}.marked .w b{color:var(--leaf);text-decoration:underline;text-decoration-thickness:3px}
+.marked .w.a{background:#fff3b0;border-radius:6px;padding:0 .3em}.marked .w.a s{color:var(--orange-ink)}
+.marked .m{background:var(--orange-soft);color:var(--orange-ink);border-radius:6px;padding:0 .3em;box-shadow:inset 0 -3px 0 #f08a24}
+.msg{font:400 1.45rem/1.3 var(--head);margin:.6rem 0}
+.model{white-space:pre-wrap;font-size:1.25rem;line-height:1.8}
+
+/* word practice */
+.word{font:700 3.2rem/1.2 var(--read);color:var(--ink);margin:.6rem 0;letter-spacing:.03em}
+.dots{display:flex;gap:.5rem;margin:.6rem 0}
+.dots i{width:1.1rem;height:1.1rem;border-radius:50%;background:var(--banana-soft);border:2px solid var(--ripe)}
+.dots i.f{background:var(--leaf);border-color:var(--leaf)}
+
+/* webcam window */
+.camdlg{width:min(42rem,calc(100vw - 2rem));padding:1.2rem 1.3rem;border:3px solid var(--ink);border-radius:22px;background:#fff;color:var(--ink)}
+.camdlg::backdrop{background:rgba(74,46,20,.6)}
+.camdlg video{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:14px;background:#2a1a0b}
+
 .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
 .confetti span{position:absolute;top:-2.5rem;animation:fall 3s linear forwards}
 @keyframes fall{to{transform:translateY(112vh) rotate(360deg)}}
 @media(prefers-reduced-motion:no-preference){.mascot{animation:bob 2.4s ease-in-out infinite}.shake{animation:sh .25s}}
 @keyframes bob{50%{transform:translateY(-6px) rotate(-4deg)}}@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-@media(max-width:34rem){.hero{flex-direction:column;text-align:center}.word{font-size:2.4rem}}
+
+@media(max-width:34rem){
+ main{padding:1.1rem 1rem 3rem}.top{padding:.8rem 1rem}
+ .hero{flex-direction:column;align-items:center;text-align:center;gap:1.2rem}
+ .bubble{width:100%}
+ .bubble::before{left:50%;bottom:auto;top:-13px;margin-left:-11px;transform:rotate(135deg)}
+ .hero h1{font-size:1.9rem}.word{font-size:2.4rem}
+ .stats b{font-size:1.7rem}
+}
 </style>
 </head>
 <body>
-<header><div class="top"><span class="logo">🍌</span><div><b>Dictado Señor Banana</b><small>¡Escribe bien y diviértete!</small></div></div></header>
+<header><div class="top"><span class="logo">🍌</span><div><b data-t="app">Dictado Señor Banana</b><small data-t="tagline">¡Escribe bien y diviértete!</small></div></div></header>
 <main>
 
 <!-- ============ INICIO ============ -->
 <section id="s-setup">
   <div class="hero">
     <div class="mascot" aria-hidden="true">🐵</div>
-    <div>
+    <div class="bubble">
       <h1 id="helloH"></h1>
       <p id="helloP"></p>
-      <button type="button" id="hearHello">🔊 Escuchar el saludo</button>
+      <button type="button" id="hearHello" data-t="hearHello">🔊 Escuchar el saludo</button>
     </div>
   </div>
   <details class="card" style="padding:1rem 1.4rem">
-    <summary>✏️ Cambiar el nombre y el saludo</summary>
-    <p class="muted">Nombre del niño</p>
+    <summary data-t="editHello">✏️ Cambiar el nombre y el saludo</summary>
+    <p class="muted" data-t="nameLbl">Nombre del niño</p>
     <input type="text" id="nameIn" autocomplete="off" spellcheck="false">
-    <p class="muted">Saludo (usa {nombre} donde quieras que aparezca el nombre)</p>
+    <p class="muted" data-t="msgLbl">Saludo (usa {nombre} donde quieras que aparezca el nombre)</p>
     <textarea id="msgIn" rows="3" spellcheck="false"></textarea>
   </details>
 
   <div class="card">
-    <h2><span class="num">1</span>🌍 ¿En qué idioma es el dictado?</h2>
+    <h2><span class="num">1</span><span data-t="step1">🌍 ¿En qué idioma es el dictado?</span></h2>
     <div class="seg" id="langSeg"></div>
-    <p id="noVoice" class="warn" hidden>⚠️ Este dispositivo no tiene voz para este idioma. Prueba con Edge o Chrome.</p>
+    <p id="noVoice" class="warn" hidden data-t="noVoice">⚠️ Este dispositivo no tiene voz para este idioma. Prueba con Edge o Chrome.</p>
   </div>
 
   <div class="card">
-    <h2><span class="num">2</span>📸 El texto del dictado</h2>
+    <h2><span class="num">2</span><span data-t="step2">📸 El texto del dictado</span></h2>
     <input id="file" type="file" accept="image/*" hidden>
     <input id="cam" type="file" accept="image/*" capture="environment" hidden>
     <div class="row">
-      <button type="button" class="btn hot" id="camBtn">📷 Hacer una foto</button>
-      <button type="button" id="photoBtn">🖼️ Elegir de la galería</button>
+      <button type="button" class="btn hot" id="camBtn" data-t="cam">📷 Hacer una foto</button>
+      <button type="button" id="photoBtn" data-t="gallery">🖼️ Elegir de la galería</button>
     </div>
     <p class="muted" id="ocrStatus"></p>
-    <textarea id="text" rows="7" spellcheck="false" placeholder="O escribe aquí el texto del dictado. Revisa que esté bien antes de empezar."></textarea>
+    <textarea id="text" rows="7" spellcheck="false" data-tp="textPh" placeholder="O escribe aquí el texto del dictado. Revisa que esté bien antes de empezar."></textarea>
     <p id="err" class="warn" hidden></p>
   </div>
 
   <div class="card">
-    <h2><span class="num">3</span>✍️ ¿Cómo vas a escribir?</h2>
+    <h2><span class="num">3</span><span data-t="step3">✍️ ¿Cómo vas a escribir?</span></h2>
     <div class="seg" id="modeSeg"></div>
     <p class="muted" id="modeHelp"></p>
   </div>
 
   <div class="card">
-    <h2><span class="num">4</span>🐢 Velocidad de lectura</h2>
+    <h2><span class="num">4</span><span data-t="step4">🐢 Velocidad de lectura</span></h2>
     <div class="seg" id="speedSeg"></div>
   </div>
 
-  <button type="button" class="btn go" id="startBtn" disabled style="width:100%;font-size:1.4rem;padding:1rem">🚀 ¡Empezar el dictado!</button>
+  <button type="button" class="btn go" id="startBtn" disabled style="width:100%;font-size:1.4rem;padding:1rem" data-t="start">🚀 ¡Empezar el dictado!</button>
 </section>
 
 <!-- ============ DICTADO ============ -->
@@ -147,42 +202,61 @@ input[type=range]{width:100%;accent-color:var(--orange);height:1.6rem}
     <div class="bar"><i id="fill"></i></div>
     <p class="counter" id="counter"></p>
     <p class="status" id="status" aria-live="polite"></p>
-    <input id="seek" type="range" min="0" value="0" aria-label="Frase del dictado">
+    <input id="seek" type="range" min="0" value="0" data-ta="seek" aria-label="Frase del dictado">
     <div class="sentence" id="sentence" hidden></div>
     <div class="row">
-      <button type="button" id="prev">⏮️ Anterior</button>
+      <button type="button" id="prev" data-t="prev">⏮️ Anterior</button>
       <button type="button" class="btn hot" id="play" style="min-width:10rem">▶️ Escuchar</button>
-      <button type="button" id="next">Siguiente ⏭️</button>
-      <button type="button" id="again">🔁 Repetir</button>
+      <button type="button" id="next" data-t="next">Siguiente ⏭️</button>
+      <button type="button" id="again" data-t="again">🔁 Repetir</button>
     </div>
-    <p class="muted">Velocidad</p>
+    <p class="muted" data-t="speed">Velocidad</p>
     <div class="seg" id="speedSeg2"></div>
   </div>
 
   <div class="card" id="writeCard" hidden>
-    <h2>⌨️ Escribe aquí tu dictado</h2>
-    <textarea id="written" class="write" rows="7" placeholder="Escribe aquí lo que escuches…" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
-    <div class="sp" id="spW" role="group" aria-label="Letras especiales"></div>
+    <h2 data-t="writeH">⌨️ Escribe aquí tu dictado</h2>
+    <textarea id="written" class="write" rows="7" data-tp="writePh" placeholder="Escribe aquí lo que escuches…" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+    <div class="sp" id="spW" role="group" data-ta="special" aria-label="Letras especiales"></div>
     <p class="muted" id="spHelp"></p>
   </div>
 
   <details class="card" style="padding:1rem 1.4rem">
-    <summary>⚙️ Ajustes de la voz</summary>
-    <div class="row"><label for="voice" class="muted">🎙️ Voz</label><select id="voice" style="max-width:100%;padding:.5rem;border-radius:10px;border:2px solid var(--line)"></select><button type="button" id="testVoice">🔊 Probar</button></div>
-    <label class="check"><input type="checkbox" id="punct" checked> Leer los signos de puntuación (coma, punto…)</label>
-    <label class="check"><input type="checkbox" id="short"> Trozos más cortos (2 palabras cada vez)</label>
-    <label class="check"><input type="checkbox" id="showText"> Mostrar el texto de la frase</label>
-    <label class="check"><input type="checkbox" id="countPunct"> Contar la puntuación como error al corregir</label>
+    <summary data-t="voiceSet">⚙️ Ajustes de la voz</summary>
+    <div class="row"><label for="voice" class="muted" data-t="voice">🎙️ Voz</label><select id="voice" style="max-width:100%;padding:.5rem;border-radius:10px;border:2px solid var(--line)"></select><button type="button" id="testVoice" data-t="test">🔊 Probar</button></div>
+    <label class="check"><input type="checkbox" id="punct" checked> <span data-t="optPunct">Leer los signos de puntuación (coma, punto…)</span></label>
+    <label class="check"><input type="checkbox" id="short"> <span data-t="optShort">Trozos más cortos (2 palabras cada vez)</span></label>
+    <label class="check"><input type="checkbox" id="showText"> <span data-t="optShow">Mostrar el texto de la frase</span></label>
+    <label class="check"><input type="checkbox" id="countPunct"> <span data-t="optCount">Contar la puntuación como error al corregir</span></label>
   </details>
 
   <div class="row">
-    <button type="button" id="back">← Volver</button>
+    <button type="button" id="back" data-t="back">← Volver</button>
     <button type="button" class="btn go" id="finish" style="margin-left:auto">🏁 Terminar y corregir</button>
   </div>
 </section>
 
 <!-- ============ CORRECCIÓN ============ -->
 <section id="s-result" hidden>
+  <!-- paper mode: correct the sheet from a photo -->
+  <div class="card" id="sheetBox" hidden>
+    <h2 data-t="sheetH">📸 Corrige tu hoja con una foto</h2>
+    <p class="muted" data-t="sheetHelp"></p>
+    <input id="sheetFile" type="file" accept="image/*" hidden>
+    <input id="sheetCam" type="file" accept="image/*" capture="environment" hidden>
+    <div class="row">
+      <button type="button" class="btn hot" id="sheetCamBtn" data-t="sheetCam"></button>
+      <button type="button" id="sheetFileBtn" data-t="gallery"></button>
+    </div>
+    <p class="muted" id="sheetStatus"></p>
+    <p id="sheetErr" class="warn" hidden></p>
+    <div id="sheetReview" hidden>
+      <p class="warn" data-t="sheetReview"></p>
+      <textarea id="sheetText" class="write" rows="6" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" data-ta="sheetH"></textarea>
+      <p id="sheetEmpty" class="warn" hidden data-t="sheetEmpty"></p>
+      <div class="row"><button type="button" class="btn go" id="sheetCheck" data-t="sheetCheck"></button></div>
+    </div>
+  </div>
   <div class="card" id="resBox"></div>
 </section>
 
@@ -194,11 +268,11 @@ input[type=range]{width:100%;accent-color:var(--orange);height:1.6rem}
     <p class="muted" id="phelp"></p>
     <div class="word" id="pword" aria-live="polite"></div>
     <div class="dots" id="pdots" aria-hidden="true"></div>
-    <div class="row"><button type="button" id="phear">🔊 Escuchar</button></div>
-    <input type="text" id="pin" aria-label="Escribe la palabra" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:1.6rem">
-    <div class="sp" id="spP" role="group" aria-label="Letras especiales"></div>
-    <p id="pwarn" class="warn" hidden role="alert">🤔 Casi. Mira la palabra y escríbela otra vez.</p>
-    <div class="row"><button type="button" class="btn go" id="pcheck">✅ Comprobar</button></div>
+    <div class="row"><button type="button" id="phear" data-t="listen">🔊 Escuchar</button></div>
+    <input type="text" id="pin" data-ta="pin" aria-label="Escribe la palabra" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" style="font-size:1.6rem">
+    <div class="sp" id="spP" role="group" data-ta="special" aria-label="Letras especiales"></div>
+    <p id="pwarn" class="warn" hidden role="alert" data-t="pwarn">🤔 Casi. Mira la palabra y escríbela otra vez.</p>
+    <div class="row"><button type="button" class="btn go" id="pcheck" data-t="check">✅ Comprobar</button></div>
   </div>
 </section>
 
@@ -207,45 +281,161 @@ input[type=range]{width:100%;accent-color:var(--orange);height:1.6rem}
   <div class="card" style="text-align:center">
     <div class="mascot" aria-hidden="true">🏆</div>
     <h2 style="justify-content:center" id="doneH"></h2>
-    <p>Has practicado todas las palabras. ¡Cada vez escribes mejor!</p>
-    <button type="button" class="btn go" id="again2">🔄 Otro dictado</button>
+    <p data-t="doneP">Has practicado todas las palabras. ¡Cada vez escribes mejor!</p>
+    <button type="button" class="btn go" id="again2" data-t="another">🔄 Otro dictado</button>
   </div>
 </section>
 
 </main>
 
+<!-- webcam window (computers; phones use their own camera app) -->
+<dialog id="camDlg" class="camdlg" aria-labelledby="camH">
+  <h2 id="camH" data-t="camH">📷 Cámara</h2>
+  <video id="camVideo" autoplay playsinline muted></video>
+  <p id="camMsg" class="warn" hidden role="alert"></p>
+  <div class="row">
+    <button type="button" class="btn go" id="camShot" data-t="camShot"></button>
+    <button type="button" id="camCancel" data-t="camCancel"></button>
+  </div>
+</dialog>
+
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const store={get:k=>{try{return localStorage.getItem(k)}catch{return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch{}}};
-const SPEEDS=[['🐌 Súper lento',.25],['🐢 Muy lento',.4],['🚶 Lento',.55],['🏃 Normal',.75],['🚀 Rápido',1]];
+const SPEED_V=[.25,.4,.55,.75,1];
 const SPEC={es:['á','é','í','ó','ú','ü','ñ','¿','¡'],ca:['à','è','é','í','ò','ó','ú','ï','ü','ç','l·l']};
-const HOW={es:'Toca una letra para ponerla en tu texto.',ca:'Toca una letra para ponerla. Para l·l: l, Mayús + 3 (·), l.'};
-const DEF_MSG='¡Hola, {nombre}! Vamos a hacer dictado hoy. ¡Creo que vas a triunfar!';
+
+/* ---------- textos de pantalla: todo cambia con el idioma del dictado ---------- */
+// static elements use data-t (text), data-tp (placeholder) and data-ta (aria-label) with these keys
+const T={
+ es:{app:'Dictado Señor Banana',tagline:'¡Escribe bien y diviértete!',
+  hearHello:'🔊 Escuchar el saludo',editHello:'✏️ Cambiar el nombre y el saludo',nameLbl:'Nombre del niño',
+  msgLbl:'Saludo (usa {nombre} donde quieras que aparezca el nombre)',
+  defMsg:'¡Hola, {nombre}! Vamos a hacer dictado hoy. ¡Creo que vas a triunfar!',friend:'amigo',hi:n=>`¡Hola, ${n}!`,
+  step1:'🌍 ¿En qué idioma es el dictado?',noVoice:'⚠️ Este dispositivo no tiene voz para este idioma. Prueba con Edge o Chrome.',
+  step2:'📸 El texto del dictado',cam:'📷 Hacer una foto',gallery:'🖼️ Elegir de la galería',
+  textPh:'O escribe aquí el texto del dictado. Revisa que esté bien antes de empezar.',
+  step3:'✍️ ¿Cómo vas a escribir?',paper:'📄 En papel',pc:'⌨️ En el ordenador',
+  paperHelp:'📄 Solo escucharás el dictado y escribirás en tu hoja. Al final puedes hacer una foto de la hoja para corregirla, o compararla tú con el texto.',
+  pcHelp:'⌨️ Escribirás aquí, en el ordenador. Al final el programa corrige y te da una nota.',
+  step4:'🐢 Velocidad de lectura',speeds:['🐌 Súper lento','🐢 Muy lento','🚶 Lento','🏃 Normal','🚀 Rápido'],
+  start:'🚀 ¡Empezar el dictado!',seek:'Frase del dictado',prev:'⏮️ Anterior',next:'Siguiente ⏭️',again:'🔁 Repetir',
+  listen:'🔊 Escuchar',play:'▶️ Escuchar',pause:'⏸️ Pausa',speed:'Velocidad',
+  writeH:'⌨️ Escribe aquí tu dictado',writePh:'Escribe aquí lo que escuches…',special:'Letras especiales',
+  how:'Toca una letra para ponerla en tu texto.',
+  voiceSet:'⚙️ Ajustes de la voz',voice:'🎙️ Voz',test:'🔊 Probar',defVoice:'(voz por defecto)',
+  testSay:'Hola, soy tu voz para el dictado. ¿Me oyes bien?',
+  optPunct:'Leer los signos de puntuación (coma, punto…)',optShort:'Trozos más cortos (2 palabras cada vez)',
+  optShow:'Mostrar el texto de la frase',optCount:'Contar la puntuación como error al corregir',
+  back:'← Volver',finishPc:'🏁 Terminar y corregir',finishPaper:'🏁 Terminar',
+  sentence:(i,n)=>`Frase ${i} <span>de ${n}</span>`,listening:'👂 Escucha y escribe…',paused:'⏸️ En pausa',
+  ended:b=>`🎉 ¡Dictado terminado! Pulsa «${b}».`,
+  correct:'📝 ¡Vamos a corregir!',stars:f=>`${f} de 5 estrellas`,
+  cheer:[n=>`¡Perfecto, ${n}! ¡Eres un campeón del dictado!`,n=>`¡Muy bien, ${n}! Casi perfecto.`,
+   n=>`¡Buen trabajo, ${n}! Vamos a practicar un poquito.`,n=>`¡Sigue así, ${n}! Practicar te hará mejor.`,
+   n=>`¡No te rindas, ${n}! Cada error es una oportunidad para aprender.`],
+  grade:'nota sobre 10',good:'palabras bien',bad:'fallos',
+  legend:'Tachado en rojo: lo que escribiste · Verde: la palabra correcta · Amarillo: falta o sobra una tilde (cuenta medio fallo) · Naranja: se te olvidó.',
+  practice:'💪 Practicar las palabras',noErr:'🌟 ¡Sin ningún error!',another:'🔄 Otro dictado',
+  compareP:'Compara tu hoja con el texto original y cuenta tus errores:',myErr:'❌ Mis errores:',seeNote:'⭐ Ver mi nota',
+  note:sc=>`Nota: <b>${sc}</b> sobre 10`,
+  wordN:(i,n)=>`Palabra ${i} <span>de ${n}</span>`,
+  phelp:r=>`Escríbela ${r} veces. Las 2 primeras, copiando; las demás, ¡de memoria! 🧠`,
+  pin:'Escribe la palabra',pwarn:'🤔 Casi. Mira la palabra y escríbela otra vez.',check:'✅ Comprobar',
+  doneH:n=>`¡Muy bien, ${n}!`,doneSay:n=>`¡Muy bien, ${n}! Has terminado de practicar.`,
+  doneP:'Has practicado todas las palabras. ¡Cada vez escribes mejor!',
+  photoSafe:'🔒 La foto se lee en este dispositivo y no se guarda.',preparing:'⏳ Preparando…',
+  reading:p=>`📖 Leyendo la foto… ${p}%`,
+  photoErr:'😕 No se pudo leer la foto (hace falta internet la primera vez). Prueba con más luz o escribe el texto.',
+  sheetH:'📸 Corrige tu hoja con una foto',
+  sheetHelp:'Haz una foto de la hoja con el dictado: solo el texto, con buena luz y la hoja recta. La app la lee y la corrige.',
+  sheetCam:'📷 Hacer una foto de tu hoja',
+  sheetReview:'👀 Esto es lo que ha leído la app. Con la hoja delante, arregla solo las palabras que la app ha leído mal. Las faltas de verdad déjalas como están: ¡esas son las que corregimos!',
+  sheetCheck:'✅ Corregir mi hoja',
+  sheetEmpty:'✏️ No hay texto. Haz otra foto o escribe aquí lo que pone en la hoja.',
+  orCount:'✍️ O cuenta tú los errores',
+  camH:'📷 Cámara',camShot:'📸 Hacer la foto',camCancel:'Cancelar',
+  camErr:'📷 No se puede abrir la cámara. Mira que el ordenador tenga cámara y que el navegador tenga permiso para usarla, o elige una foto de la galería.'},
+ ca:{app:'Dictat Señor Banana',tagline:'Escriu bé i diverteix-te!',
+  hearHello:'🔊 Escolta la salutació',editHello:'✏️ Canvia el nom i la salutació',nameLbl:'Nom del nen',
+  msgLbl:'Salutació (fes servir {nom} on vulguis que surti el nom)',
+  defMsg:'Hola, {nom}! Avui farem un dictat. Segur que ho faràs molt bé!',friend:'amic',hi:n=>`Hola, ${n}!`,
+  step1:'🌍 En quina llengua és el dictat?',noVoice:'⚠️ Aquest dispositiu no té veu per a aquesta llengua. Prova amb Microsoft Edge (té veus catalanes).',
+  step2:'📸 El text del dictat',cam:'📷 Fes una foto',gallery:'🖼️ Tria de la galeria',
+  textPh:'O escriu aquí el text del dictat. Revisa que estigui bé abans de començar.',
+  step3:'✍️ Com escriuràs?',paper:'📄 En paper',pc:'⌨️ A l\'ordinador',
+  paperHelp:'📄 Només escoltaràs el dictat i escriuràs al teu full. Al final pots fer una foto del full per corregir-lo, o comparar-lo tu amb el text.',
+  pcHelp:'⌨️ Escriuràs aquí, a l\'ordinador. Al final el programa corregeix i et posa una nota.',
+  step4:'🐢 Velocitat de lectura',speeds:['🐌 Súper lent','🐢 Molt lent','🚶 Lent','🏃 Normal','🚀 Ràpid'],
+  start:'🚀 Comença el dictat!',seek:'Frase del dictat',prev:'⏮️ Anterior',next:'Següent ⏭️',again:'🔁 Repeteix',
+  listen:'🔊 Escolta',play:'▶️ Escolta',pause:'⏸️ Pausa',speed:'Velocitat',
+  writeH:'⌨️ Escriu aquí el teu dictat',writePh:'Escriu aquí el que sentis…',special:'Lletres especials',
+  how:'Toca una lletra per posar-la al teu text. Per a l·l: l, Majúscules + 3 (·), l.',
+  voiceSet:'⚙️ Opcions de la veu',voice:'🎙️ Veu',test:'🔊 Prova',defVoice:'(veu per defecte)',
+  testSay:'Hola, sóc la teva veu per al dictat. Em sents bé?',
+  optPunct:'Llegeix els signes de puntuació (coma, punt…)',optShort:'Trossos més curts (2 paraules cada vegada)',
+  optShow:'Mostra el text de la frase',optCount:'Compta la puntuació com a error en corregir',
+  back:'← Torna',finishPc:'🏁 Acaba i corregeix',finishPaper:'🏁 Acaba',
+  sentence:(i,n)=>`Frase ${i} <span>de ${n}</span>`,listening:'👂 Escolta i escriu…',paused:'⏸️ En pausa',
+  ended:b=>`🎉 Dictat acabat! Prem «${b}».`,
+  correct:'📝 Anem a corregir!',stars:f=>`${f} de 5 estrelles`,
+  cheer:[n=>`Perfecte, ${n}! Ets un campió del dictat!`,n=>`Molt bé, ${n}! Gairebé perfecte.`,
+   n=>`Bona feina, ${n}! Practiquem una mica.`,n=>`Continua així, ${n}! Practicar et farà millorar.`,
+   n=>`No et rendeixis, ${n}! Cada error és una oportunitat per aprendre.`],
+  grade:'nota sobre 10',good:'paraules bé',bad:'errors',
+  legend:'Ratllat en vermell: el que vas escriure · Verd: la paraula correcta · Groc: falta o sobra un accent (compta mig error) · Taronja: se t\'ha oblidat.',
+  practice:'💪 Practica les paraules',noErr:'🌟 Cap error!',another:'🔄 Un altre dictat',
+  compareP:'Compara el teu full amb el text original i compta els errors:',myErr:'❌ Els meus errors:',seeNote:'⭐ Mira la meva nota',
+  note:sc=>`Nota: <b>${sc}</b> sobre 10`,
+  wordN:(i,n)=>`Paraula ${i} <span>de ${n}</span>`,
+  phelp:r=>`Escriu-la ${r} vegades. Les 2 primeres, copiant; les altres, de memòria! 🧠`,
+  pin:'Escriu la paraula',pwarn:'🤔 Gairebé. Mira la paraula i torna-la a escriure.',check:'✅ Comprova',
+  doneH:n=>`Molt bé, ${n}!`,doneSay:n=>`Molt bé, ${n}! Has acabat de practicar.`,
+  doneP:'Has practicat totes les paraules. Cada vegada escrius millor!',
+  photoSafe:'🔒 La foto es llegeix en aquest dispositiu i no es desa.',preparing:'⏳ Preparant…',
+  reading:p=>`📖 Llegint la foto… ${p}%`,
+  photoErr:'😕 No s\'ha pogut llegir la foto (cal internet la primera vegada). Prova amb més llum o escriu el text.',
+  sheetH:'📸 Corregeix el teu full amb una foto',
+  sheetHelp:'Fes una foto del full amb el dictat: només el text, amb bona llum i el full recte. L\'app el llegeix i el corregeix.',
+  sheetCam:'📷 Fes una foto del teu full',
+  sheetReview:'👀 Això és el que ha llegit l\'app. Amb el full al davant, arregla només les paraules que l\'app ha llegit malament. Les faltes de debò deixa-les com estan: són les que corregim!',
+  sheetCheck:'✅ Corregeix el meu full',
+  sheetEmpty:'✏️ No hi ha text. Fes una altra foto o escriu aquí el que posa al full.',
+  orCount:'✍️ O compta tu els errors',
+  camH:'📷 Càmera',camShot:'📸 Fes la foto',camCancel:'Cancel·la',
+  camErr:'📷 No es pot obrir la càmera. Mira que l\'ordinador tingui càmera i que el navegador tingui permís per fer-la servir, o tria una foto de la galeria.'}
+};
+const t=()=>T[S.lang];
 const PUNCT={es:{',':'coma','.':'punto',';':'punto y coma',':':'dos puntos','?':'cierra interrogación','¿':'abre interrogación','!':'cierra exclamación','¡':'abre exclamación','…':'puntos suspensivos','"':'comillas','«':'abre comillas','»':'cierra comillas','(':'abre paréntesis',')':'cierra paréntesis'},
 ca:{',':'coma','.':'punt',';':'punt i coma',':':'dos punts','?':'tanca interrogació','!':'tanca exclamació','…':'punts suspensius','"':'cometes','«':'obre cometes','»':'tanca cometes','(':'obre parèntesi',')':'tanca parèntesi'}};
-const S={lang:'es',mode:'paper',rate:.4,sentences:[],idx:0,run:0,playing:false,timer:null,release:null,res:null,words:[],wi:0,rep:0,reps:5,peek:false};
+const S={lang:store.get('sb-lang')==='ca'?'ca':'es',mode:'paper',rate:.4,sentences:[],idx:0,run:0,playing:false,timer:null,release:null,res:null,words:[],wi:0,rep:0,reps:5,peek:false};
 const show=id=>{['setup','play','result','practice','done'].forEach(x=>$('#s-'+x).hidden=x!==id);scrollTo(0,0)};
 
 /* ---------- saludo ---------- */
+// one greeting per language ('sb-msg' keeps the Spanish one saved by earlier versions)
+const msgKey=()=>S.lang==='es'?'sb-msg':'sb-msg-ca';
 $('#nameIn').value=store.get('sb-name')||'Haidar';
-$('#msgIn').value=store.get('sb-msg')||DEF_MSG;
-const name=()=>$('#nameIn').value.trim()||'amigo';
-const hello=()=>$('#msgIn').value.replaceAll('{nombre}',name());
-function paintHello(){$('#helloH').textContent=`¡Hola, ${name()}!`;$('#helloP').textContent=hello().replace(/^¡Hola,[^!]*!\s*/,'')||hello();store.set('sb-name',$('#nameIn').value);store.set('sb-msg',$('#msgIn').value)}
-$('#nameIn').oninput=$('#msgIn').oninput=paintHello;paintHello();
-$('#hearHello').onclick=()=>{halt();say(hello(),'es',.9)};
+const name=()=>$('#nameIn').value.trim()||t().friend;
+const hello=()=>$('#msgIn').value.replace(/\{(nombre|nom)\}/g,name());
+function loadMsg(){$('#msgIn').value=store.get(msgKey())||t().defMsg}
+function paintHello(){$('#helloH').textContent=t().hi(name());$('#helloP').textContent=hello().replace(/^¡?Hola,[^!]*!\s*/,'')||hello()}
+$('#nameIn').oninput=()=>{store.set('sb-name',$('#nameIn').value);paintHello()};
+$('#msgIn').oninput=()=>{store.set(msgKey(),$('#msgIn').value);paintHello()};
+$('#hearHello').onclick=()=>{halt();say(hello(),S.lang,.9)};
 
 /* ---------- voces ---------- */
 const tag=l=>l==='es'?'es-ES':'ca-ES';
-const vlist=l=>speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l));
+// some browsers can't read aloud at all: without this guard the whole script stopped here
+const hasTTS='speechSynthesis' in window&&'SpeechSynthesisUtterance' in window;
+const vlist=l=>(hasTTS?speechSynthesis.getVoices():[]).filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l));
 const best=l=>{const a=vlist(l);return a.find(v=>/natural|neural|online/i.test(v.name))||a.find(v=>v.lang.replace('_','-')===tag(l))||a[0]};
-function loadVoices(){const a=vlist(S.lang),sel=$('#voice'),keep=sel.value;sel.innerHTML=a.map(v=>`<option>${esc(v.name)}</option>`).join('')||'<option value="">(voz por defecto)</option>';const b=a.some(v=>v.name===keep)?keep:(best(S.lang)||{}).name;if(b)sel.value=b;$('#noVoice').hidden=a.length>0}
-speechSynthesis.addEventListener('voiceschanged',loadVoices);
-function say(t,l=S.lang,r=S.rate){return new Promise(res=>{const u=new SpeechSynthesisUtterance(t);u.lang=tag(l);u.rate=r;u.pitch=1.05;const v=l===S.lang?(vlist(l).find(x=>x.name===$('#voice').value)||best(l)):best(l);if(v)u.voice=v;u.onend=u.onerror=()=>res();speechSynthesis.speak(u)})}
+function loadVoices(){const a=vlist(S.lang),sel=$('#voice'),keep=sel.value;sel.innerHTML=a.map(v=>`<option>${esc(v.name)}</option>`).join('')||`<option value="">${t().defVoice}</option>`;const b=a.some(v=>v.name===keep)?keep:(best(S.lang)||{}).name;if(b)sel.value=b;$('#noVoice').hidden=a.length>0}
+if(hasTTS)speechSynthesis.addEventListener('voiceschanged',loadVoices);
+function say(t,l=S.lang,r=S.rate){return new Promise(res=>{if(!hasTTS)return res();const u=new SpeechSynthesisUtterance(t);u.lang=tag(l);u.rate=r;u.pitch=1.05;const v=l===S.lang?(vlist(l).find(x=>x.name===$('#voice').value)||best(l)):best(l);if(v)u.voice=v;u.onend=u.onerror=()=>res();speechSynthesis.speak(u)})}
 const wait=ms=>new Promise(res=>{S.release=res;S.timer=setTimeout(()=>{S.release=null;res()},ms)});
-function halt(){S.run++;speechSynthesis.cancel();clearTimeout(S.timer);if(S.release){S.release();S.release=null}}
-$('#testVoice').onclick=()=>{halt();say(S.lang==='es'?'Hola, soy tu voz para el dictado. ¿Me oyes bien?':'Hola, sóc la teva veu per al dictat. Em sents bé?')};
+function halt(){S.run++;if(hasTTS)speechSynthesis.cancel();clearTimeout(S.timer);if(S.release){S.release();S.release=null}}
+$('#testVoice').onclick=()=>{halt();say(t().testSay)};
 
 /* ---------- lectura tipo dictado ---------- */
 const split=t=>t.replace(/\s+/g,' ').trim().split(/(?<=[.!?…])\s+/u).filter(Boolean);
@@ -261,14 +451,14 @@ async function readSentence(s,id){const ok=()=>id===S.run,slow=Math.max(1,.8/S.r
  await say(s);if(!ok())return false;await wait((1500+wc(s)*400)*slow);return ok()}
 async function play(){halt();const id=S.run;S.playing=true;ui();
  while(S.playing&&id===S.run){if(!(await readSentence(S.sentences[S.idx],id)))return;
-  if(S.idx<S.sentences.length-1){S.idx++;ui()}else{S.playing=false;ui('🎉 ¡Dictado terminado! Pulsa «Terminar y corregir».')}}}
+  if(S.idx<S.sentences.length-1){S.idx++;ui()}else{S.playing=false;ui(t().ended(S.mode==='pc'?t().finishPc.slice(3):t().finishPaper.slice(3)))}}}
 function pause(){halt();S.playing=false;ui()}
 function go(i,p){S.idx=Math.min(Math.max(i,0),S.sentences.length-1);if(S.playing||p)play();else{halt();ui()}}
 function ui(msg){const n=S.sentences.length;
- $('#counter').innerHTML=`Frase ${S.idx+1} <span>de ${n}</span>`;
- $('#status').textContent=msg||(S.playing?'👂 Escucha y escribe…':'⏸️ En pausa');
+ $('#counter').innerHTML=t().sentence(S.idx+1,n);
+ $('#status').textContent=msg||(S.playing?t().listening:t().paused);
  $('#seek').max=n-1;$('#seek').value=S.idx;$('#fill').style.width=((S.idx+1)/n*100)+'%';
- $('#play').textContent=S.playing?'⏸️ Pausa':'▶️ Escuchar';
+ $('#play').textContent=S.playing?t().pause:t().play;
  $('#prev').disabled=S.idx===0;$('#next').disabled=S.idx>=n-1;
  const b=$('#sentence');b.hidden=!$('#showText').checked;b.textContent=S.sentences[S.idx]||''}
 
@@ -277,19 +467,25 @@ function seg(id,items,get,set){const el=$(id);el.innerHTML=items.map(([l,v])=>`<
  el.onclick=e=>{const b=e.target.closest('button');if(!b)return;set(b.dataset.v)}}
 function paintSpeed(){['#speedSeg','#speedSeg2'].forEach(id=>$$(id+' button').forEach(b=>b.classList.toggle('on',+b.dataset.v===S.rate)))}
 const setRate=v=>{S.rate=+v;paintSpeed();if(S.playing)play()};
-seg('#speedSeg',SPEEDS.map(([l,v])=>[l,v]),()=>S.rate,setRate);seg('#speedSeg2',SPEEDS,()=>S.rate,setRate);
-seg('#langSeg',[['🇪🇸 Español','es'],['🟡 Català','ca']],()=>S.lang,v=>{S.lang=v;$$('#langSeg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));loadVoices();paintSpecials()});
-function paintMode(){$('#modeHelp').textContent=S.mode==='paper'?'📄 Solo escucharás el dictado y escribirás en tu hoja. Al final comparas con el texto.':'⌨️ Escribirás aquí, en el ordenador. Al final el programa corrige y te da una nota.'}
-seg('#modeSeg',[['📄 En papel','paper'],['⌨️ En el ordenador','pc']],()=>S.mode,v=>{S.mode=v;$$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));paintMode()});paintMode();
+// speed and mode buttons have translated labels, so they are rebuilt on every language change
+function paintSegs(){const sp=t().speeds.map((l,i)=>[l,SPEED_V[i]]);
+ seg('#speedSeg',sp,()=>S.rate,setRate);seg('#speedSeg2',sp,()=>S.rate,setRate);
+ seg('#modeSeg',[[t().paper,'paper'],[t().pc,'pc']],()=>S.mode,v=>{S.mode=v;$$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));paintMode()})}
+seg('#langSeg',[['🇪🇸 Español','es'],['🟡 Català','ca']],()=>S.lang,v=>{S.lang=v;store.set('sb-lang',v);$$('#langSeg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));applyTexts()});
+function paintMode(){$('#modeHelp').textContent=S.mode==='paper'?t().paperHelp:t().pcHelp}
+function applyTexts(){const x=t();document.documentElement.lang=S.lang;document.title=x.app;
+ $$('[data-t]').forEach(el=>el.textContent=x[el.dataset.t]);
+ $$('[data-tp]').forEach(el=>el.placeholder=x[el.dataset.tp]);
+ $$('[data-ta]').forEach(el=>el.setAttribute('aria-label',x[el.dataset.ta]));
+ paintSegs();paintMode();loadMsg();paintHello();paintSpecials();loadVoices();$('#ocrStatus').textContent=$('#sheetStatus').textContent=x.photoSafe}
 
 function insertAt(el,t){el.setRangeText(t,el.selectionStart??el.value.length,el.selectionEnd??el.value.length,'end');el.dispatchEvent(new Event('input'));el.focus()}
-function paintSpecials(){[['#spW','#written'],['#spP','#pin']].forEach(([c,t])=>{$(c).innerHTML=SPEC[S.lang].map(x=>`<button type="button">${x}</button>`).join('');$(c).onclick=e=>{const b=e.target.closest('button');if(b)insertAt($(t),b.textContent)}});$('#spHelp').textContent=HOW[S.lang]}
-paintSpecials();
+function paintSpecials(){[['#spW','#written'],['#spP','#pin']].forEach(([c,t])=>{$(c).innerHTML=SPEC[S.lang].map(x=>`<button type="button">${x}</button>`).join('');$(c).onclick=e=>{const b=e.target.closest('button');if(b)insertAt($(t),b.textContent)}});$('#spHelp').textContent=T[S.lang].how}
 
 $('#text').oninput=()=>{$('#startBtn').disabled=!split($('#text').value).length};
 $('#startBtn').onclick=async()=>{S.sentences=split($('#text').value);S.idx=0;S.playing=false;$('#written').value='';
- $('#writeCard').hidden=S.mode!=='pc';$('#finish').textContent=S.mode==='pc'?'🏁 Terminar y corregir':'🏁 Terminar';
- show('play');halt();const id=S.run;ui('💬 '+hello());await say(hello(),'es',.9);if(id!==S.run)return;play()};
+ $('#writeCard').hidden=S.mode!=='pc';$('#finish').textContent=S.mode==='pc'?t().finishPc:t().finishPaper;
+ show('play');halt();const id=S.run;ui('💬 '+hello());await say(hello(),S.lang,.9);if(id!==S.run)return;play()};
 $('#back').onclick=()=>{pause();show('setup')};
 $('#play').onclick=()=>S.playing?pause():play();
 $('#prev').onclick=()=>go(S.idx-1);$('#next').onclick=()=>go(S.idx+1);$('#again').onclick=()=>go(S.idx,true);
@@ -301,69 +497,124 @@ $('#again2').onclick=()=>{halt();$('#text').value='';$('#startBtn').disabled=tru
 function norm(s){return s.normalize('NFC').replace(/[’‘`´]/g,"'").replace(/([lL])[.•∙⋅]([lL])/g,'$1·$2').trim()}
 const WORD=/[\p{L}\p{M}\p{N}]+(?:['·][\p{L}\p{M}]+)*|\S/gu,ISW=/^[\p{L}\p{N}]/u;
 function tok(t,p){const a=norm(t).match(WORD)||[];return p?a:a.filter(x=>ISW.test(x))}
+// strips only accent marks (grave, acute, diaeresis) so ñ and ç stay different letters;
+// built from char codes so no editor turns the escapes into invisible characters
+const ACC=new RegExp('['+String.fromCharCode(0x300,0x301,0x308)+']','g');
+const noAcc=w=>w.normalize('NFD').replace(ACC,'').normalize('NFC');
+// "mañana" is accepted for "Mañana" when the word only has a capital because it starts a sentence
+const lowFirst=w=>w.charAt(0).toLocaleLowerCase()+w.slice(1);
+function sentenceStarts(et){const a=tok(et,true);return new Set(a.filter((x,k)=>ISW.test(x)&&(k===0||/^[.!?…¿¡«"(]$/.test(a[k-1]))))}
 function compare(et,wt,p){const a=tok(et,p),b=tok(wt,p),n=a.length,m=b.length;
  const dp=Array.from({length:n+1},()=>new Uint16Array(m+1));
  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)dp[i][j]=a[i]===b[j]?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
  const items=[];let mi=[],ex=[];
- const fl=()=>{const k=Math.min(mi.length,ex.length);for(let x=0;x<k;x++)items.push({op:'w',e:mi[x],w:ex[x]});for(let x=k;x<mi.length;x++)items.push({op:'m',e:mi[x]});for(let x=k;x<ex.length;x++)items.push({op:'x',w:ex[x]});mi=[];ex=[]};
+ const fl=()=>{const k=Math.min(mi.length,ex.length);for(let x=0;x<k;x++)items.push({op:noAcc(mi[x])===noAcc(ex[x])?'a':'w',e:mi[x],w:ex[x]});for(let x=k;x<mi.length;x++)items.push({op:'m',e:mi[x]});for(let x=k;x<ex.length;x++)items.push({op:'x',w:ex[x]});mi=[];ex=[]};
  let i=0,j=0;
  while(i<n||j<m){if(i<n&&j<m&&a[i]===b[j]){fl();items.push({op:'o',e:a[i]});i++;j++}else if(j>=m||(i<n&&dp[i+1][j]>=dp[i][j+1]))mi.push(a[i++]);else ex.push(b[j++])}
- fl();const ok=items.filter(x=>x.op==='o').length;
- return{items,total:n,ok,score:n?Math.round(ok/n*100)/10:0,wrong:[...new Set(items.filter(x=>(x.op==='w'||x.op==='m')&&ISW.test(x.e)).map(x=>x.e))]}}
+ fl();const ok=items.filter(x=>x.op==='o').length,acc=items.filter(x=>x.op==='a').length;
+ // a missing or extra accent costs half a word
+ return{items,total:n,ok,acc,score:n?Math.round((ok+acc/2)/n*100)/10:0,starts:sentenceStarts(et),
+  wrong:[...new Set(items.filter(x=>(x.op==='w'||x.op==='m'||x.op==='a')&&ISW.test(x.e)).map(x=>x.e))]}}
 /*END*/
 
 /* ---------- corrección ---------- */
-const stars=sc=>{const f=Math.round(sc/2);return`<div class="stars" aria-label="${f} de 5 estrellas">${'★'.repeat(f)}<span class="off">${'★'.repeat(5-f)}</span></div>`};
-const cheer=sc=>{const n=name();return sc>=9.5?`¡Perfecto, ${n}! ¡Eres un campeón del dictado!`:sc>=8?`¡Muy bien, ${n}! Casi perfecto.`:sc>=6?`¡Buen trabajo, ${n}! Vamos a practicar un poquito.`:sc>=4?`¡Sigue así, ${n}! Practicar te hará mejor.`:`¡No te rindas, ${n}! Cada error es una oportunidad para aprender.`};
-function celebrate(sc){const m=cheer(sc);halt();say(m,'es',.9);if(sc>=8)confetti();return m}
+const stars=sc=>{const f=Math.round(sc/2);return`<div class="stars" aria-label="${t().stars(f)}">${'★'.repeat(f)}<span class="off">${'★'.repeat(5-f)}</span></div>`};
+const cheer=sc=>t().cheer[sc>=9.5?0:sc>=8?1:sc>=6?2:sc>=4?3:4](name());
+function celebrate(sc){const m=cheer(sc);halt();say(m,S.lang,.9);if(sc>=8)confetti();return m}
 function confetti(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const box=document.createElement('div');box.className='confetti';box.setAttribute('aria-hidden','true');const em=['🎉','⭐','🧡','💚','💜','✨'];
  for(let i=0;i<36;i++){const s=document.createElement('span');s.textContent=em[i%6];s.style.left=Math.random()*100+'%';s.style.animationDelay=Math.random()*1.2+'s';s.style.fontSize=(1+Math.random()*1.2)+'rem';box.append(s)}
  document.body.append(box);setTimeout(()=>box.remove(),4800)}
-$('#finish').onclick=()=>{halt();S.playing=false;const box=$('#resBox'),text=$('#text').value;
- if(S.mode==='pc'){const r=S.res=compare(text,$('#written').value,$('#countPunct').checked),m=celebrate(r.score);
-  box.innerHTML=`<h2>📝 ¡Vamos a corregir!</h2>${stars(r.score)}<p class="msg">${esc(m)}</p>
-   <div class="stats"><div class="a"><b>${r.score}</b><span>nota sobre 10</span></div><div class="b"><b>${r.ok}</b><span>palabras bien</span></div><div class="c"><b>${r.total-r.ok}</b><span>fallos</span></div></div>
-   <p class="marked">${r.items.map(it=>it.op==='o'?`<span>${esc(it.e)}</span>`:it.op==='w'?`<span class="w"><s>${esc(it.w)}</s> <b>${esc(it.e)}</b></span>`:it.op==='m'?`<span class="m">${esc(it.e)}</span>`:`<s class="x">${esc(it.w)}</s>`).join('')}</p>
-   <p class="muted">Tachado en rojo: lo que escribiste · Verde: la palabra correcta · Naranja: se te olvidó.</p>
-   <div class="row">${r.wrong.length?'<button type="button" class="btn hot" id="goPractice">💪 Practicar las palabras</button>':'<p class="msg" style="color:var(--green)">🌟 ¡Sin ningún error!</p>'}<button type="button" class="btn violet" id="newOne">🔄 Otro dictado</button></div>`;
-  const gp=$('#goPractice');if(gp)gp.onclick=startPractice}
- else{box.innerHTML=`<h2>📝 ¡Vamos a corregir!</h2><p class="muted">Compara tu hoja con el texto original y cuenta tus errores:</p><p class="model">${esc(text)}</p>
-  <div class="row"><label for="errN"><b>❌ Mis errores:</b></label><input type="number" id="errN" min="0" value="0"><button type="button" class="btn go" id="seeNote">⭐ Ver mi nota</button></div><div id="noteOut"></div>
-  <div class="row"><button type="button" class="btn violet" id="newOne">🔄 Otro dictado</button></div>`;
-  $('#seeNote').onclick=()=>{const tot=Math.max(1,compare(text,'',false).total),e=Math.min(+$('#errN').value||0,tot),sc=Math.round((tot-e)/tot*100)/10,m=celebrate(sc);$('#noteOut').innerHTML=`${stars(sc)}<p class="msg">${esc(m)}</p><p class="muted">Nota: <b>${sc}</b> sobre 10</p>`}}
+// full correction (used by "ordenador" mode and by the photo of a paper sheet)
+function showCorrection(r){const x=t(),box=$('#resBox'),m=celebrate(r.score);S.res=r;$('#sheetBox').hidden=true;
+  box.innerHTML=`<h2>${x.correct}</h2>${stars(r.score)}<p class="msg">${esc(m)}</p>
+   <div class="stats"><div class="a"><b>${r.score}</b><span>${x.grade}</span></div><div class="b"><b>${r.ok}</b><span>${x.good}</span></div><div class="c"><b>${r.total-r.ok}</b><span>${x.bad}</span></div></div>
+   <p class="marked">${r.items.map(it=>it.op==='o'?`<span>${esc(it.e)}</span>`:it.op==='w'?`<span class="w"><s>${esc(it.w)}</s> <b>${esc(it.e)}</b></span>`:it.op==='a'?`<span class="w a"><s>${esc(it.w)}</s> <b>${esc(it.e)}</b></span>`:it.op==='m'?`<span class="m">${esc(it.e)}</span>`:`<s class="x">${esc(it.w)}</s>`).join('')}</p>
+   <p class="muted">${x.legend}</p>
+   <div class="row">${r.wrong.length?`<button type="button" class="btn hot" id="goPractice">${x.practice}</button>`:`<p class="msg" style="color:var(--green)">${x.noErr}</p>`}<button type="button" class="btn violet" id="newOne">${x.another}</button></div>`;
+  const gp=$('#goPractice');if(gp)gp.onclick=startPractice;
+  $('#newOne').onclick=$('#again2').onclick;show('result')}
+$('#finish').onclick=()=>{halt();S.playing=false;const box=$('#resBox'),text=$('#text').value,x=t();
+ if(S.mode==='pc')return showCorrection(compare(text,$('#written').value,$('#countPunct').checked));
+ // paper: correct from a photo of the sheet (#sheetBox), or count the mistakes by hand (#resBox)
+ $('#sheetBox').hidden=false;$('#sheetReview').hidden=true;$('#sheetText').value='';$('#sheetErr').hidden=true;$('#sheetEmpty').hidden=true;
+ box.innerHTML=`<h2>${x.orCount}</h2><p class="muted">${x.compareP}</p><p class="model">${esc(text)}</p>
+  <div class="row"><label for="errN"><b>${x.myErr}</b></label><input type="number" id="errN" min="0" value="0"><button type="button" class="btn go" id="seeNote">${x.seeNote}</button></div><div id="noteOut"></div>
+  <div class="row"><button type="button" class="btn violet" id="newOne">${x.another}</button></div>`;
+ $('#seeNote').onclick=()=>{const tot=Math.max(1,compare(text,'',false).total),e=Math.min(+$('#errN').value||0,tot),sc=Math.round((tot-e)/tot*100)/10,m=celebrate(sc);$('#noteOut').innerHTML=`${stars(sc)}<p class="msg">${esc(m)}</p><p class="muted">${x.note(sc)}</p>`};
  $('#newOne').onclick=$('#again2').onclick;show('result')};
+$('#sheetFileBtn').onclick=()=>$('#sheetFile').click();
+$('#sheetCheck').onclick=()=>{const v=$('#sheetText').value;$('#sheetEmpty').hidden=!!v.trim();
+ if(v.trim())showCorrection(compare($('#text').value,v,$('#countPunct').checked))};
 
 /* ---------- práctica de palabras ---------- */
 function startPractice(){S.words=S.res.wrong.slice(0,8);S.wi=0;S.rep=0;S.peek=false;$('#pin').value='';show('practice');paintPractice();hear()}
 const hear=()=>{halt();say(S.words[S.wi],S.lang,Math.max(.5,S.rate))};
 function paintPractice(){const w=S.words[S.wi],vis=S.rep<2||S.peek;
- $('#pcount').innerHTML=`Palabra ${S.wi+1} <span>de ${S.words.length}</span>`;
- $('#phelp').textContent=`Escríbela ${S.reps} veces. Las 2 primeras, copiando; las demás, ¡de memoria! 🧠`;
+ $('#pcount').innerHTML=t().wordN(S.wi+1,S.words.length);
+ $('#phelp').textContent=t().phelp(S.reps);
  $('#pword').textContent=vis?w:'· · ·';
  $('#pdots').innerHTML=Array.from({length:S.reps},(_,i)=>`<i class="${i<S.rep?'f':''}"></i>`).join('');
  $('#pfill').style.width=Math.round((S.wi*S.reps+S.rep)/(S.words.length*S.reps)*100)+'%';$('#pwarn').hidden=!S.peek}
-function check(){if(norm($('#pin').value)!==norm(S.words[S.wi])){S.peek=true;$('#pin').value='';paintPractice();const w=$('#pwarn');w.classList.remove('shake');void w.offsetWidth;w.classList.add('shake');return}
+function check(){const v=norm($('#pin').value),w=norm(S.words[S.wi]);
+ if(v!==w&&!(S.res.starts.has(S.words[S.wi])&&v===lowFirst(w))){S.peek=true;$('#pin').value='';paintPractice();const box=$('#pwarn');box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');return}
  S.peek=false;$('#pin').value='';
- if(S.rep+1<S.reps)S.rep++;else{S.rep=0;if(S.wi+1>=S.words.length){$('#doneH').textContent=`¡Muy bien, ${name()}!`;show('done');confetti();halt();say(`¡Muy bien, ${name()}! Has terminado de practicar.`,'es',.9);return}S.wi++}
+ if(S.rep+1<S.reps)S.rep++;else{S.rep=0;if(S.wi+1>=S.words.length){$('#doneH').textContent=t().doneH(name());show('done');confetti();halt();say(t().doneSay(name()),S.lang,.9);return}S.wi++}
  paintPractice();hear()}
 $('#pcheck').onclick=check;$('#pin').onkeydown=e=>{if(e.key==='Enter')check()};$('#phear').onclick=hear;
 
 /* ---------- foto -> texto (en el navegador; la foto no se guarda) ---------- */
-const ST0='🔒 La foto se lee en este dispositivo y no se guarda.';$('#ocrStatus').textContent=ST0;
-$('#photoBtn').onclick=()=>$('#file').click();$('#camBtn').onclick=()=>$('#cam').click();
-async function readPhoto(e){const f=e.target.files[0];if(!f)return;
- const st=$('#ocrStatus'),err=$('#err'),btns=[$('#photoBtn'),$('#camBtn')];err.hidden=true;btns.forEach(b=>b.disabled=true);st.textContent='⏳ Preparando…';
- try{if(!window.Tesseract)await new Promise((ok,ko)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=ok;s.onerror=ko;document.head.append(s)});
-  const bmp=await createImageBitmap(f),k=Math.min(1,2200/Math.max(bmp.width,bmp.height)),c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);
-  const g=c.getContext('2d');g.filter='grayscale(1) contrast(1.3)';g.drawImage(bmp,0,0,c.width,c.height);
-  const w=await Tesseract.createWorker(S.lang==='es'?'spa':'cat',1,{logger:m=>{if(m.status==='recognizing text')st.textContent=`📖 Leyendo la foto… ${Math.round(m.progress*100)}%`}});
-  const{data}=await w.recognize(c);await w.terminate();
-  $('#text').value=data.text.replace(/-\n(?=\p{Ll})/gu,'').replace(/\n{2,}/g,'\n\n').replace(/(?<!\n)\n(?!\n)/g,' ').replace(/[ \t]{2,}/g,' ').trim();$('#text').oninput()}
- catch{err.textContent='😕 No se pudo leer la foto (hace falta internet la primera vez). Prueba con más luz o escribe el texto.';err.hidden=false}
- finally{btns.forEach(b=>b.disabled=false);st.textContent=ST0;e.target.value=''}}
-$('#file').onchange=$('#cam').onchange=readPhoto;
+$('#photoBtn').onclick=()=>$('#file').click();
+// reads a photo into text; onProgress gets 0..100. For a handwritten sheet the dictionary is switched off,
+// otherwise Tesseract "fixes" the child's misspellings into real words and hides the mistakes.
+async function ocr(f,onProgress,handwriting){
+ if(!window.Tesseract)await new Promise((ok,ko)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=ok;s.onerror=ko;document.head.append(s)});
+ const bmp=await createImageBitmap(f),k=Math.min(1,2200/Math.max(bmp.width,bmp.height)),c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);
+ const g=c.getContext('2d');g.filter='grayscale(1) contrast(1.3)';g.drawImage(bmp,0,0,c.width,c.height);
+ const w=await Tesseract.createWorker(S.lang==='es'?'spa':'cat',1,{logger:m=>{if(m.status==='recognizing text')onProgress(Math.round(m.progress*100))}},
+  handwriting?{load_system_dawg:'0',load_freq_dawg:'0'}:{});
+ try{const{data}=await w.recognize(c);
+  return data.text.replace(/-\n(?=\p{Ll})/gu,'').replace(/\n{2,}/g,'\n\n').replace(/(?<!\n)\n(?!\n)/g,' ').replace(/[ \t]{2,}/g,' ').trim()}
+ finally{await w.terminate()}}
+async function readPhoto(f){
+ const st=$('#ocrStatus'),err=$('#err'),btns=[$('#photoBtn'),$('#camBtn')];err.hidden=true;btns.forEach(b=>b.disabled=true);st.textContent=t().preparing;
+ try{$('#text').value=await ocr(f,p=>st.textContent=t().reading(p),false);$('#text').oninput()}
+ catch{err.textContent=t().photoErr;err.hidden=false}
+ finally{btns.forEach(b=>b.disabled=false);st.textContent=t().photoSafe}}
+
+/* ---------- cámara ---------- */
+// Phones and tablets open their own camera from <input capture>. Computers ignore "capture" and only show a
+// file picker, so there the app opens the webcam itself in a small window.
+const liveCam=()=>!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)&&!matchMedia('(pointer: coarse)').matches;
+let camStream=null;
+function stopCam(){if(camStream)camStream.getTracks().forEach(tr=>tr.stop());camStream=null}
+// resolves with the photo as a File, or null if the window was closed
+function webcamPhoto(){return new Promise(async res=>{const d=$('#camDlg'),v=$('#camVideo'),msg=$('#camMsg'),shot=$('#camShot');
+ msg.hidden=true;shot.disabled=true;
+ const done=f=>{stopCam();v.srcObject=null;if(d.open)d.close();res(f)};
+ $('#camCancel').onclick=()=>done(null);d.oncancel=e=>{e.preventDefault();done(null)};
+ shot.onclick=()=>{const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);
+  c.toBlob(b=>done(b?new File([b],'foto.jpg',{type:'image/jpeg'}):null),'image/jpeg',.92)};
+ d.showModal();
+ try{camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1920},height:{ideal:1080}}});
+  if(!d.open)return stopCam();v.srcObject=camStream;await v.play();shot.disabled=false;shot.focus()}
+ catch{msg.textContent=t().camErr;msg.hidden=false}})}
+// one camera button + its <input capture> fallback; onPhoto gets the File
+function cameraButton(btn,input,onPhoto){
+ $(btn).onclick=async()=>{if(!liveCam())return $(input).click();const f=await webcamPhoto();if(f)onPhoto(f)};
+ $(input).onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)onPhoto(f)}}
+const galleryInput=(input,onPhoto)=>{$(input).onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)onPhoto(f)}};
+cameraButton('#camBtn','#cam',readPhoto);galleryInput('#file',readPhoto);
+
+/* ---------- dictado en papel: corregir con una foto de la hoja ---------- */
+async function readSheet(f){
+ const st=$('#sheetStatus'),err=$('#sheetErr'),btns=[$('#sheetCamBtn'),$('#sheetFileBtn')];
+ err.hidden=true;btns.forEach(b=>b.disabled=true);st.textContent=t().preparing;
+ try{$('#sheetText').value=await ocr(f,p=>st.textContent=t().reading(p),true);$('#sheetReview').hidden=false;$('#sheetText').focus()}
+ catch{err.textContent=t().photoErr;err.hidden=false}
+ finally{btns.forEach(b=>b.disabled=false);st.textContent=t().photoSafe}}
+cameraButton('#sheetCamBtn','#sheetCam',readSheet);galleryInput('#sheetFile',readSheet);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-loadVoices();
+applyTexts();
 </script>
 </body>
 </html>
