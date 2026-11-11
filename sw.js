@@ -1,4 +1,4 @@
-const CACHE = 'senor-banana-v3';
+const CACHE = 'senor-banana-v4';
 const FILES = [
   './',
   'index.html',

@@ -308,6 +308,23 @@ function paintOptionGroups() {
 }
 optionGroup('#langSeg', [['🇪🇸 Español', 'es'], ['🟡 Català', 'ca']], S.lang, setLang);
 
+/* ---------- light / dark theme (light by default) ---------- */
+const isDark = () => document.documentElement.dataset.theme === 'dark';
+function paintTheme() {
+  const btn = $('#themeBtn');
+  const label = isDark() ? tr().themeLight : tr().themeDark;
+  btn.textContent = isDark() ? '☀️' : '🌙';
+  btn.setAttribute('aria-label', label);
+  btn.title = label;
+  btn.setAttribute('aria-pressed', String(isDark()));
+}
+$('#themeBtn').addEventListener('click', () => {
+  if (isDark()) delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = 'dark';
+  store.set('sb-theme', isDark() ? 'dark' : 'light');
+  paintTheme();
+});
+
 function paintMode() {
   $('#modeHelp').textContent = S.mode === 'paper' ? tr().paperHelp : tr().pcHelp;
 }
@@ -319,6 +336,7 @@ function applyTexts() {
   $$('[data-t]').forEach((el) => (el.textContent = x[el.dataset.t]));
   $$('[data-tp]').forEach((el) => (el.placeholder = x[el.dataset.tp]));
   $$('[data-ta]').forEach((el) => el.setAttribute('aria-label', x[el.dataset.ta]));
+  paintTheme();
   paintOptionGroups();
   paintMode();
   loadMsg();

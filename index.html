@@ -25,9 +25,15 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Lilita+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+  // apply the saved theme before the page paints (light by default)
+  try {
+    if (localStorage.getItem('sb-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+  } catch (e) {}
+</script>
 </head>
 <body>
-<header><div class="top"><span class="logo">🍌</span><div><b data-t="app">Dictado Señor Banana</b><small data-t="tagline">¡Escribe bien y diviértete!</small></div></div></header>
+<header><div class="top"><span class="logo">🍌</span><div><b data-t="app">Dictado Señor Banana</b><small data-t="tagline">¡Escribe bien y diviértete!</small></div><button type="button" id="themeBtn" class="themeBtn">🌙</button></div></header>
 <main>
 
 <!-- ============ SETUP ============ -->
