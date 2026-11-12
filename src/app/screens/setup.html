@@ -1,0 +1,115 @@
+<div class="hero">
+  <div class="mascot"><img src="Haider22.webp" alt="Habibi" title="Habibi" /></div>
+  <div class="bubble">
+    <h1>{{ t().hi(store.childName()) }}</h1>
+    <p>{{ helloRest() }}</p>
+    <button type="button" (click)="store.hearHello()">{{ t().hearHello }}</button>
+  </div>
+</div>
+
+<details class="card">
+  <summary>{{ t().editHello }}</summary>
+  <p class="muted">{{ t().nameLbl }}</p>
+  <input
+    #nameIn
+    type="text"
+    autocomplete="off"
+    spellcheck="false"
+    [value]="store.name()"
+    (input)="store.setName(nameIn.value)"
+  />
+  <p class="muted">{{ t().msgLbl }}</p>
+  <textarea
+    #msgIn
+    rows="3"
+    spellcheck="false"
+    [value]="store.message()"
+    (input)="store.setMessage(msgIn.value)"
+  ></textarea>
+</details>
+
+<div class="card">
+  <h2><span class="num">1</span><span>{{ t().step1 }}</span></h2>
+  <app-options [items]="langs" [value]="store.lang()" (picked)="store.setLang($event)" />
+  @if (!store.voices().length) {
+    <p class="warn">{{ t().noVoice }}</p>
+  }
+</div>
+
+<div class="card">
+  <h2><span class="num">2</span><span>{{ t().step2 }}</span></h2>
+  @if (saved().length) {
+    <p class="muted">{{ t().libH }}</p>
+    <ul class="lib">
+      @for (item of saved(); track item.d.id) {
+        <li>
+          <button type="button" class="libItem" [class.on]="item.on" (click)="pick(item.d)">
+            <span class="libTitle">{{ item.title }}</span>
+            <span class="libMeta">{{ item.meta }}</span>
+            @if (item.scores) {
+              <span class="libMeta">{{ item.scores }}</span>
+            }
+            @if (item.spark; as sp) {
+              <svg
+                class="spark"
+                aria-hidden="true"
+                [attr.viewBox]="'0 0 ' + spark.w + ' ' + spark.h"
+                [attr.width]="spark.w"
+                [attr.height]="spark.h"
+              >
+                <line class="base" [attr.x1]="spark.p" [attr.x2]="spark.w - spark.p" [attr.y1]="sp.base" [attr.y2]="sp.base" />
+                <polyline [attr.points]="sp.points" />
+                @for (dot of sp.dots; track $index) {
+                  <circle r="4" [attr.cx]="dot.cx" [attr.cy]="dot.cy"><title>{{ dot.title }}</title></circle>
+                }
+              </svg>
+            }
+          </button>
+          <button
+            type="button"
+            class="libDel"
+            [attr.aria-label]="item.delLabel"
+            [title]="item.delLabel"
+            (click)="remove(item.d)"
+          >
+            🗑️
+          </button>
+        </li>
+      }
+    </ul>
+    <p class="muted">{{ t().libNew }}</p>
+  }
+  <app-photo-buttons
+    [camLabel]="t().cam"
+    [galleryLabel]="t().gallery"
+    [busy]="reader.busy()"
+    (photo)="readTextPhoto($event)"
+  />
+  <p class="muted">{{ reader.status(t()) }}</p>
+  <textarea
+    #text
+    rows="7"
+    spellcheck="false"
+    [placeholder]="t().textPh"
+    [value]="store.text()"
+    (input)="store.text.set(text.value)"
+  ></textarea>
+  @if (reader.failed()) {
+    <p class="warn">{{ t().photoErr }}</p>
+  }
+</div>
+
+<div class="card">
+  <h2><span class="num">3</span><span>{{ t().step3 }}</span></h2>
+  <app-options [items]="modes()" [value]="store.mode()" (picked)="store.mode.set($event)" />
+  <p class="muted">{{ store.mode() === 'paper' ? t().paperHelp : t().pcHelp }}</p>
+</div>
+
+<div class="card">
+  <h2><span class="num">4</span><span>{{ t().step4 }}</span></h2>
+  <app-options [items]="speeds()" [value]="store.rate()" (picked)="store.setRate($event)" />
+</div>
+
+<button #startBtn type="button" class="btn go big" [disabled]="!store.canStart()" (click)="store.start()">
+  {{ t().start }}
+</button>

@@ -1,18 +1,35 @@
-'use strict';
 /* Compares the dictation text with what the child wrote, word by word.
-   No DOM access, so it can be tested with Node: require('./compare.js'). */
+   No DOM or Angular access, so it is unit-tested on its own (compare.spec.ts). */
 
 // what happened to each word in the correction
-const OP = Object.freeze({
+export const OP = {
   OK: 'o', // written correctly
   WRONG: 'w', // written differently
   ACCENT: 'a', // only an accent mark is missing or extra (counts half)
   MISSING: 'm', // forgotten
   EXTRA: 'x', // written but not in the text
-});
+} as const;
+export type Op = (typeof OP)[keyof typeof OP];
+
+export interface CompareItem {
+  op: Op;
+  expected?: string;
+  written?: string;
+}
+
+export interface CompareResult {
+  items: CompareItem[];
+  total: number;
+  ok: number;
+  acc: number;
+  errors: number;
+  score: number;
+  starts: Set<string>;
+  wrong: string[];
+}
 
 // unifies apostrophes and the Catalan "l·l" so look-alike characters are not counted as mistakes
-function norm(s) {
+export function norm(s: string): string {
   return s
     .normalize('NFC')
     .replace(/[’‘`´]/g, "'")
@@ -24,7 +41,7 @@ const WORD_OR_MARK = /[\p{L}\p{M}\p{N}]+(?:['·][\p{L}\p{M}]+)*|\S/gu;
 const IS_WORD = /^[\p{L}\p{N}]/u;
 
 // splits a text into words (and punctuation marks when withPunct is true)
-function tok(text, withPunct) {
+export function tok(text: string, withPunct: boolean): string[] {
   const tokens = norm(text).match(WORD_OR_MARK) || [];
   return withPunct ? tokens : tokens.filter((x) => IS_WORD.test(x));
 }
@@ -32,12 +49,12 @@ function tok(text, withPunct) {
 // strips only accent marks (grave, acute, diaeresis) so ñ and ç stay different letters;
 // built from char codes so no editor turns the escapes into invisible characters
 const ACCENT_MARKS = new RegExp('[' + String.fromCharCode(0x300, 0x301, 0x308) + ']', 'g');
-const noAccents = (w) => w.normalize('NFD').replace(ACCENT_MARKS, '').normalize('NFC');
+const noAccents = (w: string) => w.normalize('NFD').replace(ACCENT_MARKS, '').normalize('NFC');
 
 // "mañana" is accepted for "Mañana" when the word only has a capital because it starts a sentence
-const lowFirst = (w) => w.charAt(0).toLocaleLowerCase() + w.slice(1);
+export const lowFirst = (w: string) => w.charAt(0).toLocaleLowerCase() + w.slice(1);
 
-function sentenceStarts(expectedText) {
+function sentenceStarts(expectedText: string): Set<string> {
   const tokens = tok(expectedText, true);
   return new Set(
     tokens.filter((x, k) => IS_WORD.test(x) && (k === 0 || /^[.!?…¿¡«"(]$/.test(tokens[k - 1]))),
@@ -45,13 +62,11 @@ function sentenceStarts(expectedText) {
 }
 
 /**
- * @param {string} expectedText  the dictation text
- * @param {string} writtenText   what the child wrote
- * @param {boolean} withPunct    count punctuation marks too
- * @returns {{items:{op:string,expected?:string,written?:string}[], total:number, ok:number,
- *            acc:number, errors:number, score:number, starts:Set<string>, wrong:string[]}}
+ * @param expectedText  the dictation text
+ * @param writtenText   what the child wrote
+ * @param withPunct     count punctuation marks too
  */
-function compare(expectedText, writtenText, withPunct) {
+export function compare(expectedText: string, writtenText: string, withPunct: boolean): CompareResult {
   const a = tok(expectedText, withPunct);
   const b = tok(writtenText, withPunct);
   const n = a.length;
@@ -65,9 +80,9 @@ function compare(expectedText, writtenText, withPunct) {
     }
   }
 
-  const items = [];
-  let missing = [];
-  let extra = [];
+  const items: CompareItem[] = [];
+  let missing: string[] = [];
+  let extra: string[] = [];
   // pairs up a run of unmatched words: side by side they are wrong (or accent) words,
   // the leftovers are missing or extra words
   const flush = () => {
@@ -98,7 +113,7 @@ function compare(expectedText, writtenText, withPunct) {
   }
   flush();
 
-  const count = (op) => items.filter((x) => x.op === op).length;
+  const count = (op: Op) => items.filter((x) => x.op === op).length;
   const ok = count(OP.OK);
   const acc = count(OP.ACCENT);
   // one rule for both the grade and the "mistakes" tile: an accent slip costs half a word,
@@ -109,12 +124,14 @@ function compare(expectedText, writtenText, withPunct) {
   const wrong = [
     ...new Set(
       items
-        .filter((x) => (x.op === OP.WRONG || x.op === OP.MISSING || x.op === OP.ACCENT) && IS_WORD.test(x.expected))
-        .map((x) => x.expected),
+        .filter(
+          (x) =>
+            (x.op === OP.WRONG || x.op === OP.MISSING || x.op === OP.ACCENT) &&
+            IS_WORD.test(x.expected ?? ''),
+        )
+        .map((x) => x.expected as string),
     ),
   ];
 
   return { items, total: n, ok, acc, errors, score, starts: sentenceStarts(expectedText), wrong };
 }
-
-if (typeof module !== 'undefined') module.exports = { OP, norm, tok, compare, lowFirst };

@@ -1,0 +1,106 @@
+@if (store.result(); as res) {
+  <!-- full correction ("computer" mode, or a photo of the paper sheet) -->
+  <div class="card">
+    <h2>{{ t().correct }}</h2>
+    <app-stars [score]="res.r.score" />
+    <p class="msg">{{ res.message }}</p>
+    @if (store.progressText(res.prev, res.r.score); as progress) {
+      <p class="progress">{{ progress }}</p>
+    }
+    <div class="stats">
+      <div class="a"><b>{{ store.fmt(res.r.score) }}</b><span>{{ t().grade }}</span></div>
+      <div class="b"><b>{{ res.r.ok }}</b><span>{{ t().good }}</span></div>
+      <div class="c"><b>{{ store.fmt(res.r.errors) }}</b><span>{{ t().bad }}</span></div>
+    </div>
+    <p class="marked">
+      @for (it of res.r.items; track $index) {
+        @switch (it.op) {
+          @case (OP.OK) {
+            <span>{{ it.expected }}</span>
+          }
+          @case (OP.WRONG) {
+            <span class="w"><s>{{ it.written }}</s>{{ ' ' }}<b>{{ it.expected }}</b></span>
+          }
+          @case (OP.ACCENT) {
+            <span class="w a"><s>{{ it.written }}</s>{{ ' ' }}<b>{{ it.expected }}</b></span>
+          }
+          @case (OP.MISSING) {
+            <span class="m">{{ it.expected }}</span>
+          }
+          @default {
+            <s class="x">{{ it.written }}</s>
+          }
+        }
+      }
+    </p>
+    <p class="muted">{{ t().legend }}</p>
+    <div class="row">
+      @if (res.r.wrong.length) {
+        <button type="button" class="btn hot" (click)="store.screen.set('practice')">{{ t().practice }}</button>
+      } @else {
+        <p class="msg ok">{{ t().noErr }}</p>
+      }
+      <button type="button" class="btn violet" (click)="store.newDictation()">{{ t().another }}</button>
+    </div>
+  </div>
+} @else {
+  <!-- paper mode: correct the sheet from a photo -->
+  <div class="card">
+    <h2>{{ t().sheetH }}</h2>
+    <p class="muted">{{ t().sheetHelp }}</p>
+    <app-photo-buttons
+      [camLabel]="t().sheetCam"
+      [galleryLabel]="t().gallery"
+      [busy]="reader.busy()"
+      (photo)="readSheet($event)"
+    />
+    <p class="muted">{{ reader.status(t()) }}</p>
+    @if (reader.failed()) {
+      <p class="warn">{{ t().photoErr }}</p>
+    }
+    @if (reviewing()) {
+      <p class="warn">{{ t().sheetReview }}</p>
+      <textarea
+        #sheet
+        class="write"
+        rows="6"
+        spellcheck="false"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        [attr.aria-label]="t().sheetH"
+        [value]="sheetText()"
+        (input)="sheetText.set(sheet.value)"
+      ></textarea>
+      @if (sheetEmpty()) {
+        <p class="warn">{{ t().sheetEmpty }}</p>
+      }
+      <div class="row">
+        <button type="button" class="btn go" (click)="checkSheet()">{{ t().sheetCheck }}</button>
+      </div>
+    }
+  </div>
+
+  <!-- paper mode: count the mistakes by hand -->
+  <div class="card">
+    <h2>{{ t().orCount }}</h2>
+    <p class="muted">{{ t().compareP }}</p>
+    <p class="model">{{ store.text() }}</p>
+    <div class="row">
+      <label for="errN"><b>{{ t().myErr }}</b></label>
+      <input #errN type="number" id="errN" min="0" step="1" value="0" />
+      <button type="button" class="btn go" (click)="seeNote(errN)">{{ t().seeNote }}</button>
+    </div>
+    @if (note(); as nt) {
+      <app-stars [score]="nt.score" />
+      <p class="msg">{{ nt.message }}</p>
+      @if (store.progressText(nt.prev, nt.score); as progress) {
+        <p class="progress">{{ progress }}</p>
+      }
+      <p class="muted" [innerHTML]="t().note(store.fmt(nt.score))"></p>
+    }
+    <div class="row">
+      <button type="button" class="btn violet" (click)="store.newDictation()">{{ t().another }}</button>
+    </div>
+  </div>
+}

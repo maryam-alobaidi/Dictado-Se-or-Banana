@@ -1,11 +1,9 @@
-const CACHE = 'senor-banana-v4';
+const CACHE = 'senor-banana-v5';
+// The Angular build gives its JS/CSS bundles hashed names, so they are not listed here:
+// they are cached the first time they load (see "fetch" below).
 const FILES = [
   './',
   'index.html',
-  'styles.css',
-  'i18n.js',
-  'compare.js',
-  'app.js',
   'Haider22.webp',
   'manifest.webmanifest',
   'icon-192.png',

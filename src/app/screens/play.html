@@ -1,0 +1,88 @@
+<div class="card">
+  <div class="bar"><i [style.width.%]="progress()"></i></div>
+  <p class="counter" [innerHTML]="t().sentence(store.idx() + 1, n())"></p>
+  <p class="status" aria-live="polite">{{ store.status() }}</p>
+  <input
+    #seek
+    type="range"
+    min="0"
+    [max]="n() - 1"
+    [value]="store.idx()"
+    [attr.aria-label]="t().seek"
+    (input)="store.seek(seek.valueAsNumber)"
+    (change)="store.seekDone()"
+  />
+  @if (store.showText()) {
+    <div class="sentence">{{ sentence() }}</div>
+  }
+  <div class="row">
+    <button type="button" [disabled]="store.idx() === 0" (click)="store.goTo(store.idx() - 1)">
+      {{ t().prev }}
+    </button>
+    <button type="button" class="btn hot playBtn" (click)="store.togglePlay()">
+      {{ store.playing() ? t().pause : t().play }}
+    </button>
+    <button type="button" [disabled]="store.idx() >= n() - 1" (click)="store.goTo(store.idx() + 1)">
+      {{ t().next }}
+    </button>
+    <button type="button" (click)="store.goTo(store.idx(), true)">{{ t().again }}</button>
+  </div>
+  <p class="muted">{{ t().speed }}</p>
+  <app-options [items]="speeds()" [value]="store.rate()" (picked)="store.setRate($event)" />
+</div>
+
+@if (store.mode() === 'pc') {
+  <div class="card">
+    <h2>{{ t().writeH }}</h2>
+    <textarea
+      #written
+      class="write"
+      rows="7"
+      spellcheck="false"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      [placeholder]="t().writePh"
+      [value]="store.written()"
+      (input)="store.written.set(written.value)"
+    ></textarea>
+    <app-special-letters [target]="written" />
+    <p class="muted">{{ t().how }}</p>
+  </div>
+}
+
+<details class="card">
+  <summary>{{ t().voiceSet }}</summary>
+  <div class="row">
+    <label for="voice" class="muted">{{ t().voice }}</label>
+    <select id="voice" #voice (change)="store.voiceName.set(voice.value)">
+      @for (v of store.voices(); track v.name) {
+        <option [value]="v.name" [selected]="v.name === store.voiceName()">{{ v.name }}</option>
+      } @empty {
+        <option value="">{{ t().defVoice }}</option>
+      }
+    </select>
+    <button type="button" (click)="store.testVoice()">{{ t().test }}</button>
+  </div>
+  <label class="check">
+    <input #punct type="checkbox" [checked]="store.readPunct()" (change)="store.readPunct.set(punct.checked)" />
+    <span>{{ t().optPunct }}</span>
+  </label>
+  <label class="check">
+    <input #short type="checkbox" [checked]="store.shortChunks()" (change)="store.shortChunks.set(short.checked)" />
+    <span>{{ t().optShort }}</span>
+  </label>
+  <label class="check">
+    <input #show type="checkbox" [checked]="store.showText()" (change)="store.showText.set(show.checked)" />
+    <span>{{ t().optShow }}</span>
+  </label>
+  <label class="check">
+    <input #count type="checkbox" [checked]="store.countPunct()" (change)="store.countPunct.set(count.checked)" />
+    <span>{{ t().optCount }}</span>
+  </label>
+</details>
+
+<div class="row">
+  <button type="button" (click)="store.back()">{{ t().back }}</button>
+  <button type="button" class="btn go push" (click)="store.finish()">{{ finishIcon }} {{ store.finishLabel() }}</button>
+</div>
