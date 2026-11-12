@@ -33,7 +33,7 @@ const PRACTICE_COPY_REPS = 2;
 /* ---------- state ---------- */
 const S = {
   lang: store.get('sb-lang') === 'ca' ? 'ca' : 'es',
-  mode: 'paper', // 'paper' | 'pc'
+  mode: 'pc', // 'paper' | 'pc'
   rate: 0.4,
   sentences: [],
   idx: 0, // current sentence
